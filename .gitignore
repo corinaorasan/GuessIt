@@ -259,3 +259,4 @@ Thumbs.db
 !/gradle/wrapper/gradle-wrapper.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio,intellij,kotlin
+.idea
