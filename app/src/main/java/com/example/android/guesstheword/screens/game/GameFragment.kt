@@ -54,7 +54,8 @@ class GameFragment : Fragment() {
 
         setClickListener(binding.correctButton)
         setClickListener(binding.skipButton)
-        updateScoreAndWordText()
+        updateScoreText()
+        updateWordText()
         return binding.root
 
     }
@@ -78,11 +79,6 @@ class GameFragment : Fragment() {
         binding.scoreText.text = viewModel.score.toString()
     }
 
-    private fun updateScoreAndWordText() {
-        updateScoreText()
-        updateWordText()
-    }
-
     private fun setClickListener(view: View) {
         view.setOnClickListener {
             if (view == correct_button) {
@@ -90,7 +86,8 @@ class GameFragment : Fragment() {
             } else {
                 viewModel.onSkip()
             }
-            updateScoreAndWordText()
+            updateScoreText()
+            updateWordText()
         }
     }
 
