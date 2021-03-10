@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
+import kotlinx.android.synthetic.main.game_fragment.*
 
 /**
  * Fragment where the game is played
@@ -51,15 +52,8 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "Called ViewModelProvider!")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-            updateScoreAndWordText()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-            updateScoreAndWordText()
-        }
-
+        setClickListener(binding.correctButton)
+        setClickListener(binding.skipButton)
         updateScoreAndWordText()
         return binding.root
 
@@ -88,4 +82,16 @@ class GameFragment : Fragment() {
         updateScoreText()
         updateWordText()
     }
+
+    private fun setClickListener(view: View) {
+        view.setOnClickListener {
+            if (view == correct_button) {
+                viewModel.onCorrect()
+            } else {
+                viewModel.onSkip()
+            }
+            updateScoreAndWordText()
+        }
+    }
+
 }
