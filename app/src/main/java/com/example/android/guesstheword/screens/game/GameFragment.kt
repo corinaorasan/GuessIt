@@ -72,18 +72,18 @@ class GameFragment : Fragment() {
      * Called when the game is finished
      */
     private fun gameFinished() {
-        val action = GameFragmentDirections.actionGameToScore(score)
+        val action = GameFragmentDirections.actionGameToScore(viewModel.score)
         findNavController(this).navigate(action)
     }
 
     /** Methods for updating the UI **/
 
     private fun updateWordText() {
-        binding.wordText.text = word
+        binding.wordText.text =viewModel.word
 
     }
 
     private fun updateScoreText() {
-        binding.scoreText.text = score.toString()
+        binding.scoreText.text = viewModel.score.toString()
     }
 }
