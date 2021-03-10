@@ -33,7 +33,7 @@ import com.example.android.guesstheword.databinding.GameFragmentBinding
  * Fragment where the game is played
  */
 class GameFragment : Fragment() {
-    private lateinit var viewModel:GameViewModel
+    private lateinit var viewModel: GameViewModel
 
     private lateinit var binding: GameFragmentBinding
 
@@ -49,10 +49,19 @@ class GameFragment : Fragment() {
         )
 
         Log.i("GameFragment", "Called ViewModelProvider!")
-        viewModel= ViewModelProvider(this).get(GameViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
+        binding.correctButton.setOnClickListener {
+            viewModel.onCorrect()
+            updateScoreText()
+            updateWordText()
+        }
+        binding.skipButton.setOnClickListener {
+            viewModel.onSkip()
+            updateScoreText()
+            updateWordText()
+        }
+
         updateScoreText()
         updateWordText()
         return binding.root

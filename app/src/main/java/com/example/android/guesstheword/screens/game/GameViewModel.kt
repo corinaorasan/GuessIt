@@ -62,12 +62,12 @@ class GameViewModel:ViewModel() {
         updateScoreText()
     }
 
-    private fun onSkip() {
+    fun onSkip() {
         score--
         nextWord()
     }
 
-    private fun onCorrect() {
+    fun onCorrect() {
         score++
         nextWord()
     }
