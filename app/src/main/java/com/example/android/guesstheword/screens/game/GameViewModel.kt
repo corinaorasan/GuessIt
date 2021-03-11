@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
-    // The current word
-    var word = MutableLiveData<String>()
 
-    // The current score
+    var word = MutableLiveData<String>()
     var score = MutableLiveData<Int>()
 
     // The list of words - the front of the list is the next word to guess
@@ -48,21 +46,20 @@ class GameViewModel : ViewModel() {
     }
 
     private fun nextWord() {
-        //Select and remove a word from the list
         if (wordList.isEmpty()) {
             //gameFinished()
         } else {
-            word.value= wordList.removeAt(0)
+            word.value = wordList.removeAt(0)
         }
     }
 
     fun onSkip() {
-        score.value=(score.value)?.minus(1)
+        score.value = (score.value)?.minus(1)
         nextWord()
     }
 
     fun onCorrect() {
-        score.value=(score.value)?.plus(1)
+        score.value = (score.value)?.plus(1)
         nextWord()
     }
 }

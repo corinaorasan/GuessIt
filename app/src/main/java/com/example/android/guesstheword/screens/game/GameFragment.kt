@@ -40,7 +40,6 @@ class GameFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.game_fragment,
@@ -66,9 +65,8 @@ class GameFragment : Fragment() {
             }
         }
     }
-    
-    private fun setLiveDataObservationRelationship()
-    {
+
+    private fun setLiveDataObservationRelationship() {
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
         })
@@ -78,7 +76,7 @@ class GameFragment : Fragment() {
         })
     }
 
-    private fun getTheViewModel(){
+    private fun getTheViewModel() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
     }
 
