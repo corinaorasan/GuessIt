@@ -15,15 +15,9 @@ class GameViewModel : ViewModel() {
     private lateinit var wordList: MutableList<String>
 
     init {
-        Log.i("GameViewModel", "GameViewModel created")
         resetList()
         nextWord()
         score.value = 0
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.i("GameViewModel", "GameViewModel destroyed")
     }
 
     private fun resetList() {
