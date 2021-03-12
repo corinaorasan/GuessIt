@@ -88,8 +88,14 @@ class GameFragment : Fragment() {
                 val currentScore = viewModel.score.value ?: 0
                 val action = GameFragmentDirections.actionGameToScore(currentScore)
                 findNavController(this).navigate(action)
+                displayGameFinishToast()
                 viewModel.onFinishComplete()
+
             }
         })
+    }
+
+    private fun displayGameFinishToast() {
+        Toast.makeText(this.activity, "Game has finished", Toast.LENGTH_SHORT).show()
     }
 }
