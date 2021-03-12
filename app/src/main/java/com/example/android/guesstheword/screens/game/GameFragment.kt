@@ -47,7 +47,7 @@ class GameFragment : Fragment() {
                 false
         )
 
-        getTheViewModel()
+        getViewModel()
         setClickListener(binding.correctButton)
         setClickListener(binding.skipButton)
         setLiveDataObservationRelationship()
@@ -76,7 +76,7 @@ class GameFragment : Fragment() {
         })
     }
 
-    private fun getTheViewModel() {
+    private fun getViewModel() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
     }
 
