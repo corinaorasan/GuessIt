@@ -25,6 +25,7 @@ class GameViewModel : ViewModel() {
         resetList()
         nextWord()
         _score.value = 0
+        _eventGameFinish.value = false
     }
 
     private fun resetList() {
@@ -56,7 +57,7 @@ class GameViewModel : ViewModel() {
 
     private fun nextWord() {
         if (wordList.isEmpty()) {
-            //gameFinished()
+            onFinishComplete()
         } else {
             _word.value = wordList.removeAt(0)
         }
@@ -70,5 +71,9 @@ class GameViewModel : ViewModel() {
     fun onCorrect() {
         _score.value = (score.value)?.plus(1)
         nextWord()
+    }
+
+    fun onFinishComplete() {
+        _eventGameFinish.value = false
     }
 }
