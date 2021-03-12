@@ -82,7 +82,7 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
     }
 
-    private fun setEventGameFinish(){
+    private fun setEventGameFinish() {
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { isFinished ->
             if (isFinished) {
                 val currentScore = viewModel.score.value ?: 0
@@ -92,6 +92,4 @@ class GameFragment : Fragment() {
             }
         })
     }
-
-
 }
