@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -51,6 +52,7 @@ class GameFragment : Fragment() {
         setClickListener(binding.correctButton)
         setClickListener(binding.skipButton)
         setLiveDataObservationRelationship()
+        setEventGameFinish()
 
         return binding.root
 
@@ -80,9 +82,20 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
     }
 
-    private fun gameFinished() {
-        val currentScore = viewModel.score.value ?: 0
-        val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
-        findNavController(this).navigate(action)
+    private fun setEventGameFinish() {
+        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { isFinished ->
+            if (isFinished) {
+                val currentScore = viewModel.score.value ?: 0
+                val action = GameFragmentDirections.actionGameToScore(currentScore)
+                findNavController(this).navigate(action)
+                displayGameFinishToast()
+                viewModel.onFinishComplete()
+
+            }
+        })
+    }
+
+    private fun displayGameFinishToast() {
+        Toast.makeText(this.activity, getString(R.string.game_finish), Toast.LENGTH_SHORT).show()
     }
 }
