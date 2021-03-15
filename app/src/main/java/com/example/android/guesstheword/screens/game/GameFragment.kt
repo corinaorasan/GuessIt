@@ -52,7 +52,7 @@ class GameFragment : Fragment() {
         getViewModel()
 
         binding.gameViewModel=viewModel
-
+        binding.setLifecycleOwner(this)
         setLiveDataObservationRelationship()
         setEventGameFinish()
 
