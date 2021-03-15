@@ -27,9 +27,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.guesstheword.R
-import com.example.android.guesstheword.databinding.GameFragmentBinding
 import com.example.android.guesstheword.databinding.ScoreFragmentBinding
-import com.example.android.guesstheword.screens.game.GameViewModel
 
 /**
  * Fragment where the final score is shown, after the game is over
@@ -56,10 +54,11 @@ class ScoreFragment : Fragment() {
         // Get args using by navArgs property delegate
         val scoreFragmentArgs by navArgs<ScoreFragmentArgs>()
         binding.scoreText.text = scoreFragmentArgs.score.toString()
-        binding.playAgainButton.setOnClickListener { onPlayAgain() }
         setViewModelFactory(scoreFragmentArgs)
         getViewModel()
-        setLiveData()
+        setLiveDataObservationRelationship()
+        binding.playAgainButton.setOnClickListener { onPlayAgain() }
+        setEventPlayAgain()
         return binding.root
     }
 
@@ -68,17 +67,25 @@ class ScoreFragment : Fragment() {
     }
 
     private fun getViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory).
-        get(ScoreViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
     }
 
     private fun setViewModelFactory(args: ScoreFragmentArgs) {
         viewModelFactory = ScoreViewModelFactory(args.score)
     }
 
-    private fun setLiveData(){
+    private fun setLiveDataObservationRelationship() {
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
+        })
+    }
+
+    private fun setEventPlayAgain() {
+        viewModel.eventPlayAgain.observe(viewLifecycleOwner, Observer { playAgain ->
+            if (playAgain) {
+                findNavController().navigate(ScoreFragmentDirections.actionRestart())
+                viewModel.onPlayAgainComplete()
+            }
         })
     }
 }
