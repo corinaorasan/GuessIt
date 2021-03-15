@@ -51,7 +51,7 @@ class GameFragment : Fragment() {
 
         getViewModel()
 
-        binding.gameViewModel=viewModel
+        binding.gameViewModel = viewModel
         binding.setLifecycleOwner(this)
 
         setLiveDataObservationRelationship()
@@ -62,10 +62,6 @@ class GameFragment : Fragment() {
     }
 
     private fun setLiveDataObservationRelationship() {
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
-
         viewModel.currentTime.observe(viewLifecycleOwner, Observer { newTime ->
             binding.timerText.text = DateUtils.formatElapsedTime(newTime)
         })
