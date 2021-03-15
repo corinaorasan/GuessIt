@@ -22,16 +22,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.ScoreFragmentBinding
+import com.example.android.guesstheword.screens.game.GameViewModel
 
 /**
  * Fragment where the final score is shown, after the game is over
  */
 class ScoreFragment : Fragment() {
-
+    private lateinit var viewModel: ScoreViewModel
+    private lateinit var viewModelFactory: ScoreViewModelFactory
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -50,11 +53,20 @@ class ScoreFragment : Fragment() {
         val scoreFragmentArgs by navArgs<ScoreFragmentArgs>()
         binding.scoreText.text = scoreFragmentArgs.score.toString()
         binding.playAgainButton.setOnClickListener { onPlayAgain() }
-
+        setViewModelFactory(scoreFragmentArgs)
+        getViewModel()
         return binding.root
     }
 
     private fun onPlayAgain() {
         findNavController().navigate(ScoreFragmentDirections.actionRestart())
+    }
+
+    private fun getViewModel(){
+        viewModel=ViewModelProvider(this).get(ScoreViewModel::class.java)
+    }
+
+    private fun setViewModelFactory(args: ScoreFragmentArgs){
+        viewModelFactory = ScoreViewModelFactory(args.score)
     }
 }
