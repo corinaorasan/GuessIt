@@ -56,10 +56,10 @@ class GameViewModel : ViewModel() {
 
     private fun nextWord() {
         if (wordList.isEmpty()) {
-            _eventGameFinish.value = true
-        } else {
-            _word.value = wordList.removeAt(0)
+            resetList()
         }
+        _word.value = wordList.removeAt(0)
+
     }
 
     fun onSkip() {
