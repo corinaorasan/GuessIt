@@ -63,7 +63,7 @@ class ScoreFragment : Fragment() {
     }
 
     private fun getViewModel(){
-        viewModel=ViewModelProvider(this).get(ScoreViewModel::class.java)
+        viewModel=ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
     }
 
     private fun setViewModelFactory(args: ScoreFragmentArgs){
