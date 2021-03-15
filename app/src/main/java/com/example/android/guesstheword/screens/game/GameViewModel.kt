@@ -1,5 +1,6 @@
 package com.example.android.guesstheword.screens.game
 
+import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,8 @@ class GameViewModel : ViewModel() {
 
         const val COUNTDOWN_TIME = 60000L
     }
+
+    private val timer: CountDownTimer()
 
     private val _word = MutableLiveData<String>()
     val word: LiveData<String>
@@ -33,6 +36,15 @@ class GameViewModel : ViewModel() {
         resetList()
         nextWord()
         _score.value = 0
+
+        timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+
+            }
+        }
     }
 
     private fun resetList() {
