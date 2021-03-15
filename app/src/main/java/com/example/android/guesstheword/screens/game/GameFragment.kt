@@ -53,6 +53,7 @@ class GameFragment : Fragment() {
 
         binding.gameViewModel=viewModel
         binding.setLifecycleOwner(this)
+
         setLiveDataObservationRelationship()
         setEventGameFinish()
 
@@ -63,10 +64,6 @@ class GameFragment : Fragment() {
     private fun setLiveDataObservationRelationship() {
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
-        })
-
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
-            binding.wordText.text = newWord
         })
 
         viewModel.currentTime.observe(viewLifecycleOwner, Observer { newTime ->
