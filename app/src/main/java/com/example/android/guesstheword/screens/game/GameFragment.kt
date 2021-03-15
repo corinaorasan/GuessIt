@@ -50,23 +50,14 @@ class GameFragment : Fragment() {
         )
 
         getViewModel()
-        setClickListener(binding.correctButton)
-        setClickListener(binding.skipButton)
+
+        binding.gameViewModel=viewModel
+
         setLiveDataObservationRelationship()
         setEventGameFinish()
 
         return binding.root
 
-    }
-
-    private fun setClickListener(view: View) {
-        view.setOnClickListener {
-            if (view == correct_button) {
-                viewModel.onCorrect()
-            } else {
-                viewModel.onSkip()
-            }
-        }
     }
 
     private fun setLiveDataObservationRelationship() {
