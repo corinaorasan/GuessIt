@@ -51,6 +51,7 @@ class GameViewModel : ViewModel() {
                 _eventGameFinish.value = true
             }
         }
+        timer.start()
     }
 
     private fun resetList() {
