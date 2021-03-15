@@ -57,6 +57,9 @@ class ScoreFragment : Fragment() {
         setViewModelFactory(scoreFragmentArgs)
         getViewModel()
         setLiveDataObservationRelationship()
+
+        binding.scoreViewModel = viewModel
+
         binding.playAgainButton.setOnClickListener { onPlayAgain() }
         setEventPlayAgain()
         return binding.root
