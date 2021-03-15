@@ -50,6 +50,9 @@ class GameFragment : Fragment() {
         )
 
         getViewModel()
+
+        binding.gameViewModel=viewModel
+
         setClickListener(binding.correctButton)
         setClickListener(binding.skipButton)
         setLiveDataObservationRelationship()
