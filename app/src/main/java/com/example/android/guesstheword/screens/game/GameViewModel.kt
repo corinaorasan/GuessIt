@@ -101,4 +101,9 @@ class GameViewModel : ViewModel() {
     fun onFinishComplete() {
         _eventGameFinish.value = false
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        timer.cancel()
+    }
 }
