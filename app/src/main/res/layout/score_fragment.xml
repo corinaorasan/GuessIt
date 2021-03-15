@@ -19,6 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="scoreViewModel"
             type="com.example.android.guesstheword.screens.score.ScoreViewModel" />
@@ -70,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+            android:onClick="@{() -> scoreViewModel.onPlayAgain()}"
             android:text="@string/play_again"
             android:theme="@style/GoButton"
             app:layout_constraintBottom_toBottomOf="parent"
