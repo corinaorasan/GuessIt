@@ -15,7 +15,11 @@ class GameViewModel : ViewModel() {
         const val COUNTDOWN_TIME = 60000L
     }
 
-    private val timer: CountDownTimer()
+    private val timer: CountDownTimer
+
+    private val _currentTime = MutableLiveData<Long>()
+    val currentTime: LiveData<Long>
+        get() = _currentTime
 
     private val _word = MutableLiveData<String>()
     val word: LiveData<String>
