@@ -97,4 +97,13 @@ class GameFragment : Fragment() {
         }
     }
 
+    private fun setEventBuzz(){
+        viewModel.eventBuzz.observe(viewLifecycleOwner, Observer { buzzType ->
+            if (buzzType != GameViewModel.BuzzType.NO_BUZZ) {
+                buzz(buzzType.pattern)
+                viewModel.onBuzzComplete()
+            }
+        })
+    }
+
 }
