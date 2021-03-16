@@ -27,7 +27,9 @@ class GameViewModel : ViewModel() {
 
         const val ONE_SECOND = 1000L
 
-        const val COUNTDOWN_TIME = 10000L
+        const val COUNTDOWN_TIME = 60000L
+
+        private const val COUNTDOWN_PANIC_SECONDS = 10L
     }
 
     private val timer: CountDownTimer
@@ -65,12 +67,17 @@ class GameViewModel : ViewModel() {
         _score.value = 0
 
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+
             override fun onTick(millisUntilFinished: Long) {
                 _currentTime.value = (millisUntilFinished / ONE_SECOND)
+                if (millisUntilFinished / ONE_SECOND <= COUNTDOWN_PANIC_SECONDS) {
+                    _eventBuzz.value = BuzzType.COUNTDOWN_PANIC
+                }
             }
 
             override fun onFinish() {
                 _currentTime.value = DONE
+                _eventBuzz.value = BuzzType.GAME_OVER
                 _eventGameFinish.value = true
             }
         }
@@ -119,6 +126,7 @@ class GameViewModel : ViewModel() {
 
     fun onCorrect() {
         _score.value = (score.value)?.plus(1)
+        _eventBuzz.value = BuzzType.CORRECT
         nextWord()
     }
 
