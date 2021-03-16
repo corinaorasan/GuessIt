@@ -22,7 +22,6 @@ class GameViewModel : ViewModel() {
     }
 
     companion object {
-
         const val DONE = 0L
 
         const val ONE_SECOND = 1000L
@@ -35,7 +34,7 @@ class GameViewModel : ViewModel() {
     private val timer: CountDownTimer
 
     private val _currentTime = MutableLiveData<Long>()
-    val currentTime: LiveData<Long>
+    private val currentTime: LiveData<Long>
         get() = _currentTime
 
     private val _word = MutableLiveData<String>()
@@ -116,7 +115,6 @@ class GameViewModel : ViewModel() {
             resetList()
         }
         _word.value = wordList.removeAt(0)
-
     }
 
     fun onSkip() {
@@ -133,7 +131,6 @@ class GameViewModel : ViewModel() {
     fun onFinishComplete() {
         _eventGameFinish.value = false
     }
-
 
     fun onBuzzComplete() {
         _eventBuzz.value = BuzzType.NO_BUZZ

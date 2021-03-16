@@ -41,7 +41,7 @@ class ScoreFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // Inflate view and obtain an instance of the binding class.
         binding = DataBindingUtil.inflate(
@@ -58,15 +58,11 @@ class ScoreFragment : Fragment() {
         setViewModelFactory(scoreFragmentArgs)
         getViewModel()
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
         binding.scoreViewModel = viewModel
 
         setEventPlayAgain()
         return binding.root
-    }
-
-    private fun onPlayAgain() {
-        findNavController().navigate(ScoreFragmentDirections.actionRestart())
     }
 
     private fun getViewModel() {
