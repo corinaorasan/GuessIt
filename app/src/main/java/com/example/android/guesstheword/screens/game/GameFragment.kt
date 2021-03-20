@@ -92,6 +92,7 @@ class GameFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 buzzer.vibrate(VibrationEffect.createWaveform(pattern, -1))
             } else {
+                @Suppress("DEPRECATION")
                 buzzer.vibrate(pattern, -1)
             }
         }
